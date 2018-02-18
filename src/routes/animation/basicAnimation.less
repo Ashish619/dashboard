@@ -1,0 +1,365 @@
+﻿:global {
+  .code-box-wrapper>h2 {
+    font-size: 16px;
+    color: #404040;
+    font-weight: 400;
+    margin: 20px auto 15px;
+  }
+  .code-box-wrapper .code-box {
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+    min-height: 220px;
+    background: #fff;
+    border-radius: 3px;
+    margin: 30px auto;
+  }
+  .code-box-wrapper .code-box-demo {
+    float: right;
+    width: 40%;
+    position: relative;
+    height: 100%;
+    min-height: 220px;
+    background: #fff;
+    padding: 10px;
+  }
+  .code-box-wrapper .code-box-code {
+    overflow: hidden;
+    border-right: 1px solid #e8e8e8;
+  }
+  .code-box-wrapper .code-box-code pre {
+    border-radius: 0;
+    overflow: auto;
+    border: none;
+    height: 100%;
+    margin: 0!important;
+    padding: 0!important;
+  }
+  .code-box-wrapper .code-box-code pre.css {
+    border-top: 1px solid #e8e8e8;
+  }
+  .code-box-wrapper .code-box-code pre code {
+    display: block;
+    border-radius: 0;
+    width: 100%;
+    background: none;
+    padding: 1em;
+  }
+  .code-box-wrapper .code-box-bar {
+    height: 20px;
+    border-top: 1px solid #e8e8e8;
+    background: #fbfbfb;
+    position: relative;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+  }
+  .code-box-wrapper.vertical .code-box-demo {
+    float: none;
+    width: 100%;
+  }
+  .code-box-wrapper.vertical .code-box-code {
+    border-right: none;
+    border-top: 1px solid #e8e8e8;
+  }
+  .code-box .code-box-demo .buttons, .code-box .code-box-demo .demo-buttons {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .code-box .code-box-demo .buttons button, .code-box .code-box-demo .demo-buttons button {
+    margin: 5px 2px 5px 0;
+  }
+  .code-box .code-box-demo .buttons button:last-child, .code-box .code-box-demo .demo-buttons button:last-child {
+    margin-right: 0;
+  }
+  .code-box .code-box-demo .buttons button:first-child, .code-box .code-box-demo .demo-buttons button:first-child {
+    margin-left: 0;
+  }
+  .code-box .code-box-demo .code-box-demo-wrapper .buttons {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .code-box .code-box-demo .code-box-shape {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 150px;
+    background: #019bf0;
+    margin: auto;
+  }
+  .code-box .code-box-demo .demo-bezier-shape {
+    width: 5px;
+    height: 5px;
+    background: #7569ff;
+    position: absolute;
+    top: 0;
+  }
+  .code-box .code-box-demo .queue-demo2 {
+    width: 60%;
+    position: relative;
+    margin: auto;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content {
+    margin-top: 10px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .queue-anim-leaving {
+    position: relative!important;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead {
+    height: 40px;
+    line-height: 40px;
+    background: #364768;
+    border-radius: 6px 6px 0 0;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li {
+    display: inline-block;
+    height: 100%;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li:before {
+    display: inline-block;
+    content: "";
+    vertical-align: middle;
+    background: #636f84;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li:first-child {
+    width: 10%;
+    text-align: center;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li:first-child:before {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li:nth-child(2) {
+    width: 70%;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li:nth-child(2):before {
+    width: 50%;
+    height: 10px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li:nth-child(3) {
+    width: 20%;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul li:nth-child(3):before {
+    width: 70%;
+    height: 10px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-tbody {
+    border: 1px solid #e8e8e8;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-tbody ul li {
+    height: 40px;
+    border-bottom: 1px solid #e8e8e8;
+    line-height: 40px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-tbody ul li:last-child {
+    border-bottom-color: transparent;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-tbody ul li:after, .code-box .code-box-demo .queue-demo2 .demo-content .demo-tbody ul li:before {
+    display: inline-block;
+    content: "";
+    background: rgba(79, 169, 251, .6);
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-tbody ul li:before {
+    width: 20px;
+    height: 10px;
+    margin-left: 3%;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-tbody ul li:after {
+    width: 50%;
+    height: 10px;
+    margin-left: 3%;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-header {
+    width: 100%;
+    background: #364768;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-header .logo {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-header .logo img:nth-child(2) {
+    margin-left: 5px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-header ul {
+    float: right;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-header ul li {
+    width: 50px;
+    height: 8px;
+    background: #4d5c76;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-banner {
+    background: #364d79;
+    height: 87px;
+    position: relative;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-banner .point {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-banner .point ul li {
+    width: 6px;
+    height: 6px;
+    background: hsla(0, 0%, 100%, .15);
+    display: inline-block;
+    border-radius: 6px;
+    margin: 0 5px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-banner .point ul li:nth-child(2) {
+    background: hsla(0, 0%, 100%, .35);
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page {
+    height: 130px;
+    position: relative;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page>h1 {
+    width: 50px;
+    height: 8px;
+    background: rgba(1, 155, 240, .35);
+    margin: 10px auto;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page>p {
+    display: block;
+    overflow: hidden;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page>p:after, .code-box .code-box-demo .queue-demo2 .demo-content .demo-page>p:before {
+    content: "";
+    display: block;
+    height: 4px;
+    background: rgba(1, 155, 240, .35);
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page>p:after {
+    width: 60px;
+    margin: 5px auto;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page>p:before {
+    width: 220px;
+    margin: auto;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page .box {
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page .box ul li {
+    width: 25%;
+    height: 65px;
+    position: relative;
+    display: inline-block;
+    background: rgba(1, 155, 240, .55);
+    border-radius: 6px;
+    margin: 0 4.16667%;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page .box ul li:before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page .box ul li:nth-child(2):before {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-page .box ul li:nth-child(3):before {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-footer {
+    height: 40px;
+    background: #364768;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-footer:after, .code-box .code-box-demo .queue-demo2 .demo-content .demo-footer:before {
+    content: "";
+    display: block;
+    background: #4d5c76;
+    height: 4px;
+    margin: 8px auto;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-footer:before {
+    width: 180px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-footer:after {
+    width: 50px;
+  }
+  .code-box .code-box-demo .queue-demo2 .demo-content .demo-thead ul {
+    height: 100%;
+    position: relative;
+  }
+  .queue-simple div {
+    padding: 10px;
+  }
+  .code-box-shape {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    background: #019bf0;
+    margin: 20px;
+    padding: 20px;
+    float: left
+  }
+  .code-box-shape2 {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 400px;
+    background: #019bf0;
+    margin: 20px;
+    padding: 20px;
+    float: left
+  }
+  .animation-card-demo {
+    height: 200px;
+    padding: 20px;
+  }
+  .demo-buttons button {
+    margin: 3px;
+  }
+}
+
+:global {
+  @media screen and (max-width: 414px) {
+    .demo-buttons {
+      margin-top: 125px
+    }
+    .queue-demo2 .buttons button {
+      margin-bottom: 10px
+    }
+  }
+}

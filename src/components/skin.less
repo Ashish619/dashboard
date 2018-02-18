@@ -1,0 +1,664 @@
+@import "./vars.less";
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@green: #64ea91;
+@blue: #8fc9fb;
+@purple: #d897eb;
+@red: #f69899;
+@yellow: #f8c82e;
+@peach: #f797d6;
+@borderBase: #e5e5e5;
+@borderSplit: #f4f4f4;
+@grass: #d6fbb5;
+@sky: #c1e0fc;
+@arsenic: #403F4C;
+@desire: #E84855;
+@stil_de_gran_yellow: #F9DC5C;
+@brillant_azure: #3185FC;
+@portland_orange: #F46036;
+@jungle_green: #1B998B;
+@space_cadet: #2E294E;
+@red_purple: #E40066;
+@tumblewed: #F1AB86;
+@russian_green: #5C946E;
+@darky_blue: #1d2a3a;
+@midnight_green:#114B5F;
+@eton_blue:#88D498;
+@white:#fff;
+@sugar_plum:#8E5572;
+
+
+:global {
+  .ant-modal-mask {
+    background-color: rgba(55, 55, 55, 0.2);
+  }
+  .ant-modal-content {
+    box-shadow: none;
+  }
+  .ant-card {
+    margin-bottom: 10px;
+    &:hover {
+      overflow: auto;
+    }
+  }
+  .ant-badge:not(.ant-badge-status) {
+    margin-right: 16px;
+  }
+  .head-example {
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    background: #eee;
+    display: inline-block;
+  }
+  body {
+    text-rendering: geometricPrecision;
+    font-size: 10px;
+  }
+  .ant-fullcalendar-header .ant-select, .ant-fullcalendar-header .ant-button {
+    margin-bottom: 10px;
+  }
+  .ant-input-group > [class*="col-"] {
+    margin-bottom: 10px
+  }
+  // LEFT SIDEBAR BLUE THEME
+  .menu_blue {
+    background-color: #2196F3!important;
+    color: white;
+    border-color: #2196F3!important;
+  }
+  .menu_blue a {
+    color: white;
+  }
+  .menu_blue a:hover {
+    color: #080716;
+  }
+  .menu_blue ul>li a:hover {
+    color: #080716;
+  }
+  .menu_blue li:hover {
+    color: #080716;
+  }
+  .menu_blue ul>li {
+    color: white;
+    background-color: #2196F3!important;
+  }
+
+
+  //Sidebar Menu Theme Styles
+
+   .menu_white {
+    background-color: @white !important;
+    color: @arsenic;
+    border-color: @white !important;
+    a {
+      color: @arsenic;
+      &:hover {
+        color: @arsenic;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @desire;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@desire;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@desire;
+
+          
+        }
+      }
+        color:@arsenic;
+        background-color: @white !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @desire;
+      }
+    }
+  }
+
+
+ .menu_sugar_plum {
+    background-color: @sugar_plum !important;
+    color: white;
+    border-color: @sugar_plum !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @green;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@green;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@green;
+
+          
+        }
+      }
+        color:white;
+        background-color: @sugar_plum !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @green;
+      }
+    }
+  }
+
+  .menu_midnight_green {
+    background-color: @midnight_green !important;
+    color: white;
+    border-color: @midnight_green !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @eton_blue;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@eton_blue;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@eton_blue;
+
+          
+        }
+      }
+        color:white;
+        background-color: @midnight_green !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @eton_blue;
+      }
+    }
+  }
+
+
+ .menu_arsenic {
+    background-color: @arsenic !important;
+    color: white;
+    border-color: @arsenic !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @stil_de_gran_yellow;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@stil_de_gran_yellow;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@stil_de_gran_yellow;
+
+          
+        }
+      }
+        color:white;
+        background-color: @arsenic !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @stil_de_gran_yellow;
+      }
+    }
+  }
+
+  .menu_brillant_azure{
+    background-color: @brillant_azure !important;
+    color: white;
+    border-color: @brillant_azure !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @arsenic;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@arsenic;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@arsenic;
+
+          
+        }
+      }
+        color:white;
+        background-color: @brillant_azure !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @arsenic;
+      }
+    }
+  }
+  .menu_portland_orange {
+    background-color: @portland_orange !important;
+    color: white;
+    border-color: @portland_orange !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @green;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@green;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@green;
+
+          
+        }
+      }
+        color:white;
+        background-color: @portland_orange !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @green;
+      }
+    }
+  }
+ 
+  .menu_jungle_green {
+    background-color: @jungle_green !important;
+    color: white;
+    border-color: @jungle_green !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @eton_blue;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@eton_blue;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@eton_blue;
+
+          
+        }
+      }
+        color:white;
+        background-color: @jungle_green !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @eton_blue;
+      }
+    }
+  }
+ 
+    .menu_desire {
+    background-color: @desire !important;
+    color: white;
+    border-color: @desire !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @stil_de_gran_yellow;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@stil_de_gran_yellow;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@stil_de_gran_yellow;
+
+          
+        }
+      }
+        color:white;
+        background-color: @desire !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @stil_de_gran_yellow;
+      }
+    }
+  }
+ 
+ .menu_stil_de_gran_yellow {
+    background-color: @stil_de_gran_yellow !important;
+    color:@arsenic;
+    border-color: @stil_de_gran_yellow !important;
+    a {
+      color: @arsenic;
+      &:hover {
+        color: @arsenic;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @desire;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@desire;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@desire;
+
+          
+        }
+      }
+        color:@arsenic;
+        background-color: @stil_de_gran_yellow !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @desire;
+      }
+    }
+  }
+    .menu_purple {
+    background-color: @purple !important;
+    color: white;
+    border-color: @purple !important;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      >li {
+        a {
+          &:hover {
+            color: @arsenic;
+          }
+        }
+        .ant-menu-submenu-title{&:hover{
+        color:@arsenic;          
+        }}
+      .ant-menu-item-selected{
+       
+          &::after{
+        border-color:@arsenic;
+
+          
+        }
+      }
+        color:white;
+        background-color: @purple !important;
+      }
+    }
+    li {
+      &:hover {
+        color: @arsenic;
+      }
+    }
+  }
+ 
+//Header & Navbar Theme Styles
+.header_white{
+    .header-menu {
+      background-color: @white !important;
+      div a {
+        border-bottom: 2px solid @arsenic!important;
+        &:hover{
+        border-bottom: 2px solid @desire!important;
+
+        }
+      }
+      .anticon {
+        color: @arsenic!important
+      }
+    }
+    .foldIcon {
+      color: @arsenic!important
+    }
+  }
+
+ .header_sugar_plum{
+    .header-menu {
+      background-color: @sugar_plum !important;
+      div a {
+        border-bottom: 2px solid white!important;
+        &:hover{
+        border-bottom: 2px solid @green!important;
+
+        }
+      }
+      .anticon {
+        color: white!important
+      }
+    }
+    .foldIcon {
+      color: white!important
+    }
+  }
+
+  .header_midnight_green{
+    .header-menu {
+      background-color: @midnight_green !important;
+      div a {
+        border-bottom: 2px solid white!important;
+        &:hover{
+        border-bottom: 2px solid @eton_blue!important;
+
+        }
+      }
+      .anticon {
+        color: white!important
+      }
+    }
+    .foldIcon {
+      color: white!important
+    }
+  }
+  .header_arsenic {
+    .header-menu {
+      background-color: @arsenic !important;
+      div a {
+        border-bottom: 2px solid white!important;
+         &:hover{
+        border-bottom: 2px solid @desire!important;
+
+        }
+      }
+      .anticon {
+        color: white!important
+      }
+    }
+    .foldIcon {
+      color: white!important
+    }
+  }
+
+  .header_brillant_azure {
+    .header-menu {
+      background-color: @brillant_azure !important;
+      div a {
+        border-bottom: 2px solid white!important;
+         &:hover{
+        border-bottom: 2px solid @stil_de_gran_yellow!important;
+
+        }
+      }
+      .anticon {
+        color: white!important
+      }
+    }
+    .foldIcon {
+      color: white!important
+    }
+  }
+
+  .header_portland_orange {
+    .header-menu {
+      background-color: @portland_orange !important;
+      div a {
+        border-bottom: 2px solid white!important;
+         &:hover{
+        border-bottom: 2px solid @stil_de_gran_yellow!important;
+
+        }
+      }
+      .anticon {
+        color: white!important
+      }
+    }
+    .foldIcon {
+      color: white!important
+    }
+  }
+  .header_jungle_green {
+    .header-menu {
+      background-color: @jungle_green !important;
+      div a {
+        border-bottom: 2px solid white!important;
+         &:hover{
+        border-bottom: 2px solid @arsenic!important;
+
+        }
+      }
+      .anticon {
+        color: white!important
+      }
+    }
+    .foldIcon {
+      color: white!important
+    }
+  }
+  .header_desire {
+    .header-menu {
+      background-color: @desire !important;
+      div a {
+        border-bottom: 2px solid white!important;
+         &:hover{
+        border-bottom: 2px solid @stil_de_gran_yellow!important;
+
+        }
+      }
+      .anticon {
+        color: white!important
+      }
+    }
+    .foldIcon {
+      color: white!important
+    }
+  }
+  .header_stil_de_gran_yellow {
+    .header-menu {
+      background-color: @stil_de_gran_yellow !important;
+      div a {
+        border-bottom: 2px solid @arsenic!important;
+         &:hover{
+        border-bottom: 2px solid @desire!important;
+
+        }
+      }
+      .anticon {
+        color: @arsenic!important
+      }
+    }
+    .foldIcon {
+      color: @arsenic!important
+    }
+  }
+  .header_purple {
+    .header-menu {
+      background-color: @purple !important;
+      div a {
+        border-bottom: 2px solid @white!important;
+         &:hover{
+        border-bottom: 2px solid @brillant_azure!important;
+
+        }
+      }
+      .anticon {
+        color: @white!important
+      }
+    }
+    .foldIcon {
+      color: @white!important
+    }
+  }
+}

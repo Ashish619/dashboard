@@ -1,0 +1,107 @@
+:global {
+    .cardProgress .ant-progress-circle-path {
+        stroke: #fff!important;
+    }
+    .cardProgress .ant-progress-circle-trail{
+        stroke: rgba(0, 0, 0, 0.1)!important
+    }
+    .extraButtons button{
+        margin-left: 10px
+    }
+    .ant-card {
+        border-radius: 0;
+    }
+    .dashboard-2 .ant-card {
+        border-radius: 0;
+        border: solid 1px rgba(64, 63, 76, 0.12);
+    }
+    .quoteCard .ant-card {
+        border-radius: 0;
+        margin-bottom: 24px;
+    }
+    
+    .dashboard-3 .ant-card-body {
+        padding: 0;
+    }
+    .dashboard-3 .ant-card-head{
+        border:0;
+        padding: 5px 20px;
+    }
+    .dashboard-3 .ant-card-head-title{
+        color: #454a5d;
+        font-size: 1.6em;
+    }
+    .dashboard-3 .ui.feed > .event > .content .summary, .dashboard-3 .ui.feed > .event > .content .summary .date, .dashboard-3 .ui.feed > .event > .content .meta a {
+        color: #fff;
+    }
+}
+
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+    background-color: @startColor;
+    background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+    background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+    background-image: -moz-linear-gradient(left, @startColor, @endColor);
+    background-image: -ms-linear-gradient(left, @startColor, @endColor);
+    background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+
+.weather {
+    &:hover {
+        box-shadow: 4px 4px 40px rgba(143, 201, 251, .6);
+    }
+    .horizontal-gradient(#46b05b, #0abac1);
+}
+
+.quote {
+    margin-bottom: 24px;
+    &:hover {
+        box-shadow: 4px 4px 40px rgba(246, 152, 153, .6);
+    }
+    .horizontal-gradient(#623fb8, #1a8ed1);
+}
+
+.imageWrap {
+    &:hover {
+        box-shadow: 4px 4px 40px rgba(246, 152, 153, .6);
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
+        opacity: .6;
+    }
+}
+
+.parapgraph {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    color: #fff;
+}
+
+.parapgraph div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parapgraph h1 {
+    margin-left: 10px;
+    color: #fff
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    border: solid 1px #fff;
+    margin-right: 10px;
+}
