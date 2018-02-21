@@ -16,3 +16,19 @@ export async function query(params) {
     data: params
   })
 }
+
+const baseURL = 'http://hemalvm.westus.cloudapp.azure.com:8002/api/v1/campaign/';
+
+export async function getTotalCount (campaignId, item) {
+        const url = `${baseURL}${campaignId}/${item}?agg=count`;
+        return request(url, {
+            method: 'GET',
+        })
+    }
+
+    export async function getCount (campaignId,item,interval) {
+      const url = `${baseURL}${campaignId}/${item}?agg=count&period=${interval}`;
+      return request(url, {
+          method: 'GET',
+      })
+  }
