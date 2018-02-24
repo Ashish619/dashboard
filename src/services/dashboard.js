@@ -25,7 +25,26 @@ export async function getTotalCount (campaignId, item) {
             method: 'GET',
         })
     }
+    export async function getWorldChartData (campaignId ,order) {
+      const url = `${baseURL}${campaignId}/country?sort=${order}`;
+      return request(url, {
+          method: 'GET',
+      })
+  }
 
+  export async function getDeviceData (campaignId ,order) {
+    const url = `${baseURL}${campaignId}/device?sort=${order}`;
+    return request(url, {
+        method: 'GET',
+    })
+}
+    
+export async function getInterestData (campaignId ,order,field) {
+  const url = `${baseURL}${campaignId}/content?sort=${order}&field=${field}`;
+  return request(url, {
+      method: 'GET',
+  })
+}
     export async function getCount (campaignId,item,interval) {
       const url = `${baseURL}${campaignId}/${item}?agg=count&period=${interval}`;
       return request(url, {

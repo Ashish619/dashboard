@@ -4,5 +4,5 @@ module.exports = {
   footerText: 'Berr Admin All Rights Reserved 2017',
   logoSrc: 'assets/lamp.svg',
   logoText: 'Berr Admin',
-  needLogin: true
+  needLogin: false
 }

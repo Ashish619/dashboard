@@ -153,18 +153,12 @@ function App({ children, location, dispatch, app }) {
   if ((login || !config.needLogin)) {
     return (
       <div
-        className={classnames(styles.layout, { [styles.fold]: isNavbar ? false : siderFold  }, {  [styles.withnavbar]: isNavbar  })}>
-        {!isNavbar  ? <aside
-            className={classnames(styles.sider , (menuTheme=="dark") ? styles.dark : menuTheme=="light" ?  styles.light : "menu_"+menuTheme )} >
-            <CustomSider {...siderProps} />
-
-          </aside>
-          : ''}
-        <div className={styles.main} id="main_content">
+        className={classnames(styles.layout)}>
+        <div className={styles.main} style={{margin: '0px'}} id="main_content">
           <div className={styles.spin} >
             <Spin tip='Loading...' spinning={loading} size='large'>
               <Header {...headerProps} />
-              <Bread location={location} />
+          
                 <div className={styles.container}>
                   <div className={styles.content} id="spin">
                   <BackTop target={() => document.getElementById('main_content')} />

@@ -22,14 +22,7 @@ render(){
   return (
  <div className={styles.badgeBox} style={{ float: 'right'  }}>
     
- <Link  className={styles.badge}>
- 
-    <Icon
-    className="trigger" className={styles.size}
-    type={this.props.pr.siderFoldRight ? 'setting' : 'menu-unfold'}
-     onClick={this.props.pr.switchSiderRight}
-    />
-  </Link>
+
      <Link onClick={this.fullScreen} className={styles.badge}>
         
           <Icon type="arrows-alt" className={styles.size}/>

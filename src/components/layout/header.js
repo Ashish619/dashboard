@@ -38,21 +38,7 @@ render(){
   return (
     <div className={styles.header  + " " + this.props.headerTheme}  >
    
-    {this.props.isNavbar
-      ? <Popover 
-          placement='bottomLeft'
-          onVisibleChange={this.props.switchMenuPopover}
-          visible={this.props.menuPopoverVisible}
-          overlayClassName={styles.popovermenu + " menu_"+ this.props.menuTheme }
-          trigger='click'
-          content={<Menus  location={this.props.location}  navOpenKeys={this.props.navOpenKeys} changeOpenKeys={this.props.changeOpenKeys}   />}>
-          <div className={styles.siderbutton}>
-            <Icon type='bars'/>
-          </div>
-        </Popover>
-      : <div className={styles.siderbutton} onClick={this.props.switchSider}>
-      <Icon className="foldIcon" type={this.props.siderFold ? 'menu-unfold' : 'menu-fold'}/>
-      </div>}
+
        
        
       <Menu className={'header-menu'} mode='horizontal'  onClick={this.props.handleClickMenu}>

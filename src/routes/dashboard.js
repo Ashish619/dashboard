@@ -7,10 +7,13 @@ import {
 } from 'antd'
 import NumberCard from '../components/dashboard/numberCard'
 import ChartComposed from '../components/dashboard/composedChart'
+import VerticalBarChart from '../components/dashboard/verticalBarChart'
+import InterestChart from '../components/dashboard/interestChart'
 import styles from './dashboard.less'
 import { color } from '../utils'
-import { getTotalCount, getCount } from '../services/dashboard.js'
+import { getTotalCount, getCount, getWorldChartData, getDeviceData, getInterestData } from '../services/dashboard.js'
 import ReactEcharts from 'echarts-for-react';
+import WorldChart from '../components/chart/g2charts/worldChart'
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -22,13 +25,10 @@ const bodyStyle = {
     }
 }
 
-
-
 const Dashboard = React.createClass({
 
-
     getInitialState() {
-
+        localStorage.setItem('campaignID', 9);
         return {
             loading: true,
             totalVisitors: 0,
@@ -36,30 +36,33 @@ const Dashboard = React.createClass({
             leadsGenerated: 0,
             roiChange: 0,
             graphData: [],
-            graphPeriod: 'day'
+            graphPeriod: 'day',
+            interest: 'totalTimeSpent',
+            worldData: [],
+            deviceData: [],
+            interestData: [],
+            campaignID: localStorage.getItem('campaignID')
         }
     },
 
+
     componentWillMount() {
-
-
         Promise.all([
-            getCount(9, 'visitors', this.state.graphPeriod),
-            getCount(9, 'popups', this.state.graphPeriod),
-            getCount(9, 'leads', this.state.graphPeriod),
-            getTotalCount(9, 'visitors'),
-            getTotalCount(9, 'popups'),
-            getTotalCount(9, 'leads')
-
-
+            getCount(this.state.campaignID, 'visitors', this.state.graphPeriod),
+            getCount(this.state.campaignID, 'popups', this.state.graphPeriod),
+            getCount(this.state.campaignID, 'leads', this.state.graphPeriod),
+            getTotalCount(this.state.campaignID, 'visitors'),
+            getTotalCount(this.state.campaignID, 'popups'),
+            getTotalCount(this.state.campaignID, 'leads'),
+            getWorldChartData(this.state.campaignID, 'asc'),
+            getDeviceData(this.state.campaignID, 'asc'),
+            getInterestData(this.state.campaignID, 'asc', this.state.interest)
         ]).then(values => {
-
             let graphDataFormat = {
                 "visitors": 0,
                 "exitIntents": 0,
                 "leadsGenerated": 0,
                 "name": ""
-
             }
             let graphData = [];
             for (var i = 0; i < values[0].length; i++) {
@@ -76,89 +79,13 @@ const Dashboard = React.createClass({
                 leadsGenerated: values[5],
                 roiChange: 0,
                 graphData: graphData,
+                worldData: values[6],
+                deviceData: values[7],
+                interestData: values[8],
                 loading: false
             });
         });
 
-    },
-    getPieChartOtion() {
-        const option = {
-            backgroundColor: '#403F4C',
-            title: {
-                text: '',
-                subtext: '',
-                x: 'center',
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br />{b} : {c} ({d}%)',
-            },
-      
-            toolbox: {
-                show: false,
-                feature: {
-
-                    magicType: {
-                        show: true,
-                        type: ['pie', 'funnel'],
-                    },
-                    restore: { show: true },
-                    saveAsImage: { show: true },
-                },
-            },
-            color: ['#EAC435', '#345995', '#E40066', '#03CEA4', '#FB4D3D', '#FFF', '#FA7921', '#1B998B'],
-
-            calculable: true,
-            series: [
-                {
-                    name: 'Radius Mode',
-                    type: 'pie',
-                    radius: [20, 150],
-                    center: ['50%', 285],
-                    roseType: 'radius',
-                    width: '80%',
-                    max: 40,
-                    itemStyle: {
-                        normal: {
-                            label: {
-                                show: true,
-                            },
-                            labelLine: {
-                                show: true,
-                                smooth: 0.9,
-                                length: 5,
-                                length2: 10,
-                            },
-                            borderWidth: 0,
-                            shadowBlur: 30,
-                            shadowOffsetX: 0,
-                            shadowOffsetY: 10,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)',
-                        },
-                        emphasis: {
-                            label: {
-                                show: true,
-                            },
-                            labelLine: {
-                                show: true,
-                            },
-                        },
-                    },
-                    data: [
-                        { value: 10, name: 'Mercedes' },
-                        { value: 5, name: 'BMW' },
-                        { value: 15, name: 'Audi' },
-                        { value: 25, name: 'Volvo' },
-                        { value: 20, name: 'Subaru' },
-                        { value: 35, name: 'Ford' },
-                        { value: 30, name: 'Reanult' },
-                        { value: 40, name: 'Toyota' },
-                    ],
-                }
-
-            ],
-        };
-        return option;
     },
 
     onChange(e) {
@@ -166,13 +93,11 @@ const Dashboard = React.createClass({
         this.setState({ graphPeriod: e.target.value, loading: true });
         let graphData = [];
         Promise.all([
-            getCount(9, 'visitors', e.target.value),
-            getCount(9, 'popups', e.target.value),
-            getCount(9, 'leads', e.target.value),
+            getCount(this.state.campaignID, 'visitors', e.target.value),
+            getCount(this.state.campaignID, 'popups', e.target.value),
+            getCount(this.state.campaignID, 'leads', e.target.value),
 
         ]).then(values => {
-            console.log(values);
-
             let graphDataFormat = {
                 "visitors": 0,
                 "exitIntents": 0,
@@ -196,7 +121,6 @@ const Dashboard = React.createClass({
         });
 
     },
-
     render() {
         let numbers = [
             {
@@ -221,13 +145,6 @@ const Dashboard = React.createClass({
                 number: this.state.roiChange
             }
         ];
-
-        const radioStyle = {
-            display: 'block',
-            height: '30px',
-            lineHeight: '30px'
-        };
-
         const numberCards = numbers.map((item, key) => <Col key={key} lg={6} md={12}>
             <NumberCard {...item} />
         </Col>)
@@ -235,41 +152,48 @@ const Dashboard = React.createClass({
             <div className="dashboard-1">
                 <Row gutter={24}>
                     {numberCards}
-                    <Col lg={18} md={24}>
-                        <Card
+                    <Col lg={16} md={24}>
+                        <Card title="Analytics Report"
                             bordered={false}
                             bodyStyle={{
-
                             }}>
-                            <div>
+                            <div style={{ display : 'inline-block'}}>
                                 <RadioGroup onChange={this.onChange} value={this.state.graphPeriod}>
-                                    <Radio style={radioStyle} value={'day'}>Day</Radio>
-                                    <Radio style={radioStyle} value={'week'}>Week</Radio>
-                                    <Radio style={radioStyle} value={'month'}>Month</Radio>
-
+                                    <Radio value={'day'}>Day</Radio>
+                                    <Radio value={'week'}>Week</Radio>
                                 </RadioGroup></div>
                             <ChartComposed data={this.state.graphData} loading={this.state.loading} />
                         </Card>
                     </Col>
-                    <Col lg={12} md={24}>
-                        <Card
+                    <Col lg={8} md={24}>
+                        <Card title="Device Report"
                             bordered={false}
                             bodyStyle={{
 
                             }}>
-                            <ReactEcharts
-                                option={this.getPieChartOtion()}
-                                style={{
-                                    height: '450px',
-                                    width: '100%',
-                                }}
-                                className="react_for_echarts"
-                            />
+                            <VerticalBarChart data={this.state.deviceData} loading={this.state.loading} />
+                        </Card>
+                    </Col>
+                </Row>
+                <Row gutter={24}>
+                    <Col lg={8} md={24}>
+                        <Card title="Interest Report"
+                            bordered={false}
+                            bodyStyle={{
+
+                            }}>
+                            <InterestChart data={this.state.interestData} name={this.state.interest} loading={this.state.loading} />
+                        </Card>
+                    </Col>
+                    <Col lg={16} md={24}>
+                        <Card title="World Report">
+                            <WorldChart worldData={this.state.worldData} loading={this.state.loading} />
                         </Card>
                     </Col>
                 </Row>
             </div>
-        )
+        );
+
     }
 });
 
