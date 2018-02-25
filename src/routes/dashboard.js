@@ -28,7 +28,7 @@ const bodyStyle = {
 const Dashboard = React.createClass({
 
     getInitialState() {
-        sessionStorage.setItem('campaignID', 9);
+   
         var item = sessionStorage.getItem('campaignID');
         if (item == null || item == '') {
 
