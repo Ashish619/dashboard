@@ -14,11 +14,10 @@ function VerticalBarChart(props) {
           <BarChart
             data={data}
             layout="vertical"
-
           >
-            <XAxis type="number" axisLine={false} tickLine={false} />
-            <YAxis type="category" dataKey="name" axisLine={false} tickLine={false} />
-            <CartesianGrid vertical={false} horizontal={false} stroke={color.borderBase} strokeDasharray='3 3' />
+            <XAxis type="number"  tickLine={false}  axisLine={{ stroke: color.borderBase, strokeWidth: 1 }}  padding={{ right: 10 }} />
+            <YAxis type="category" dataKey="name" axisLine={{ stroke: color.borderBase, strokeWidth: 1 }}  tickLine={false} />
+            <CartesianGrid  stroke={color.borderBase} strokeDasharray='3 3' />
             <Tooltip />
             <Bar dataKey="visitCount" barSize={25} fill={color.blue} />
           </BarChart>

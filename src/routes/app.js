@@ -169,7 +169,7 @@ function App({ children, location, dispatch, app }) {
               <Footer />
             </Spin>
           </div>
-          <RightSider {...headerProps}/>
+      
         </div>
         
       </div>

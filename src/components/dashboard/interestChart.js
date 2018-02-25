@@ -53,7 +53,7 @@ function InterestChart(props) {
                     {
                         name: 'Page Level Intrests',
                         type: 'pie',
-                        radius: ['30%', '50%'],
+                        radius: ['30%', '70%'],
                         center: ['50%', '50%'],
                         roseType: 'radius',
                         width: '100%',

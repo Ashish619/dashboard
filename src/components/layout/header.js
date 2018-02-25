@@ -35,11 +35,11 @@ class Header extends React.Component {
   
 
 render(){
+
   return (
     <div className={styles.header  + " " + this.props.headerTheme}  >
-   
-
-       
+         <button className="anticon anticon-arrow-left back" id="btnback" onClick={() =>back()} >
+  </button>
        
       <Menu className={'header-menu'} mode='horizontal'  onClick={this.props.handleClickMenu}>
       <SubMenu   className="avatarBadge" title={<Badge dot> <Avatar src="../../assets/avatar/9.jpg" size="default"/></Badge>}>

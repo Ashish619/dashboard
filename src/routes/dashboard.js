@@ -28,7 +28,16 @@ const bodyStyle = {
 const Dashboard = React.createClass({
 
     getInitialState() {
-        localStorage.setItem('campaignID', 9);
+        sessionStorage.setItem('campaignID', 9);
+        var item = sessionStorage.getItem('campaignID');
+        if (item == null || item == '') {
+
+            var url = location.href.split('//');
+            var protocol = url[0];
+            var domain = url[1].split('/')[0];
+            window.open(protocol + '//' + domain + '/login/', '_self');
+
+        }
         return {
             loading: true,
             totalVisitors: 0,
@@ -41,7 +50,7 @@ const Dashboard = React.createClass({
             worldData: [],
             deviceData: [],
             interestData: [],
-            campaignID: localStorage.getItem('campaignID')
+            campaignID: item
         }
     },
 
@@ -157,7 +166,7 @@ const Dashboard = React.createClass({
                             bordered={false}
                             bodyStyle={{
                             }}>
-                            <div style={{ display : 'inline-block'}}>
+                            <div style={{ display: 'inline-block' }}>
                                 <RadioGroup onChange={this.onChange} value={this.state.graphPeriod}>
                                     <Radio value={'day'}>Day</Radio>
                                     <Radio value={'week'}>Week</Radio>
