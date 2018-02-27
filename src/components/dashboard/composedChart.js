@@ -15,7 +15,7 @@ function ChartComposed(props) {
 
                 const { payload } = props
                 return <ul className={styles.legend + ' clearfix'}>
-                  {payload.map((item, key) => <li key={key}><span className={styles.radiusdot} style={{ background: item.color }} />{item.value}</li>)}
+                  {payload.map((item, key) => <li key={key}><span className={styles.radiusdot} style={{ background: item.color }} />{key == 0 ? 'Visitors' : ((key == 1) ? 'Exit Intents' : 'Leads Generated')}</li>)}
                 </ul>
               }} />
             <XAxis dataKey='name' axisLine={{ stroke: color.borderBase, strokeWidth: 1 }} tickLine={false} />
@@ -24,7 +24,7 @@ function ChartComposed(props) {
             <Tooltip
               wrapperStyle={{ border: 'none', boxShadow: '4px 4px 40px rgba(0, 0, 0, 0.05)' }}
               content={content => {
-                const list = content.payload.map((item, key) => <li key={key} className={styles.tipitem}><span className={styles.radiusdot} style={{ background: item.color }} />{item.name + ':' + item.value}</li>)
+                const list = content.payload.map((item, key) => <li key={key} className={styles.tipitem}><span className={styles.radiusdot} style={{ background: item.color }} />{(key == 0 ? 'Visitors' : ((key == 1) ? 'Exit Intents' : 'Leads Generated' )) + ':' + item.value}</li>)
                 return <div className={styles.tooltip}><p className={styles.tiptitle}>{content.label}</p><ul>{list}</ul></div>
               }} />
             <Bar type='monotone' dataKey='visitors' barSize={25} fill={color.blue} />

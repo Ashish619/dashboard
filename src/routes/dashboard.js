@@ -28,7 +28,7 @@ const bodyStyle = {
 const Dashboard = React.createClass({
 
     getInitialState() {
-   
+
         var item = sessionStorage.getItem('campaignID');
         if (item == null || item == '') {
 
@@ -47,9 +47,12 @@ const Dashboard = React.createClass({
             graphData: [],
             graphPeriod: 'day',
             interest: 'totalTimeSpent',
+            interest2: 'visitorCount',
             worldData: [],
             deviceData: [],
             interestData: [],
+            interestVisitorData: [],
+            interestActive: 'totalTimeSpent',
             campaignID: item
         }
     },
@@ -65,7 +68,8 @@ const Dashboard = React.createClass({
             getTotalCount(this.state.campaignID, 'leads'),
             getWorldChartData(this.state.campaignID, 'asc'),
             getDeviceData(this.state.campaignID, 'asc'),
-            getInterestData(this.state.campaignID, 'asc', this.state.interest)
+            getInterestData(this.state.campaignID, 'asc', this.state.interest),
+            getInterestData(this.state.campaignID, 'asc', this.state.interest2)
         ]).then(values => {
             let graphDataFormat = {
                 "visitors": 0,
@@ -91,12 +95,20 @@ const Dashboard = React.createClass({
                 worldData: values[6],
                 deviceData: values[7],
                 interestData: values[8],
+                interestVisitorData: values[9],
+
                 loading: false
             });
         });
 
     },
 
+
+    onChangeInterest() {
+        if (this.state.interestActive == 'totalTimeSpent') {
+            this.setState({ interestActive: 'visitCount' })
+        } else { this.setState({ interestActive: 'totalTimeSpent' }) }
+    },
     onChange(e) {
 
         this.setState({ graphPeriod: e.target.value, loading: true });
@@ -186,13 +198,32 @@ const Dashboard = React.createClass({
                 </Row>
                 <Row gutter={24}>
                     <Col lg={8} md={24}>
-                        <Card title="Interest Report"
-                            bordered={false}
-                            bodyStyle={{
+                        {this.state.interestActive == 'totalTimeSpent'
+                            ? <Card title="Interest Report"
+                                bordered={false}
+                                bodyStyle={{
 
-                            }}>
-                            <InterestChart data={this.state.interestData} name={this.state.interest} loading={this.state.loading} />
-                        </Card>
+                                }}>
+                                <div style={{ display: 'inline-block' }}>
+                                    <RadioGroup onChange={this.onChangeInterest} value={this.state.interestActive}>
+                                        <Radio value={'totalTimeSpent'}>Total Time Spend</Radio>
+                                        <Radio value={'visitCount'}>Visitor Count</Radio>
+                                    </RadioGroup></div>
+                                <InterestChart data={this.state.interestData} name={'totalTimeSpent'} loading={this.state.loading} />
+                            </Card>
+                            : <Card title="Interest Report"
+                                bordered={false}
+                                bodyStyle={{
+
+                                }}>
+                                <div style={{ display: 'inline-block' }}>
+                                    <RadioGroup onChange={this.onChangeInterest} value={this.state.interestActive}>
+                                        <Radio value={'totalTimeSpent'}>Total Time Spend</Radio>
+                                        <Radio value={'visitCount'}>Visitor Count</Radio>
+                                    </RadioGroup></div>
+                                <InterestChart data={this.state.interestVisitorData} name={'visitCount'} loading={this.state.loading} />
+                            </Card>
+                        }
                     </Col>
                     <Col lg={16} md={24}>
                         <Card title="World Report">
