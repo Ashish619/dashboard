@@ -32,10 +32,7 @@ const Dashboard = React.createClass({
         var item = sessionStorage.getItem('campaignID');
         if (item == null || item == '') {
 
-            var url = location.href.split('//');
-            var protocol = url[0];
-            var domain = url[1].split('/')[0];
-            window.open(protocol + '//' + domain + '/login/', '_self');
+        location.href= 'http://www.demandmatrix.com/preview/leadgain/login/#/';
 
         }
         return {
