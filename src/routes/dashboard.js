@@ -285,6 +285,8 @@ const Dashboard = React.createClass({
                                     width: 'auto',
                                     borderBottomLeftRadius: 0,
                                     borderTopLeftRadius: 0,
+                                    position: 'relative',
+                                    top:'-1px'
 
 
                                 }}>
