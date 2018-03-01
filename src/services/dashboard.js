@@ -45,8 +45,9 @@ export async function getInterestData (campaignId ,order,field) {
       method: 'GET',
   })
 }
-    export async function getCount (campaignId,item,interval) {
-      const url = `${baseURL}${campaignId}/${item}?agg=count&period=${interval}`;
+    export async function getCount (campaignId,item,period,start,limit) {
+      
+      const url = `${baseURL}${campaignId}/${item}/data?agg=count&period=${period}&start=${start}&limit=${limit}`;
       return request(url, {
           method: 'GET',
       })
