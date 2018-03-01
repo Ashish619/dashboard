@@ -28,7 +28,7 @@ function ChartComposed(props) {
     const NotAxisTickButLabel = props => {
       let values = props.payload.value.split("-");
       if (values.length == 1) {
-        return <text height={props.height} fontSize="14px" fill={props.fill} textAnchor={props.textAnchor} width={props.width} x={props.x} y={props.y}>
+        return <text height={props.height} fontSize="10px" fill={props.fill} textAnchor={props.textAnchor} width={props.width} x={props.x} y={props.y}>
           {
             <tspan y={props.y + 20}>
               {props.payload.value}
