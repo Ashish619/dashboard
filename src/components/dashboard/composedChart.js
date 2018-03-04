@@ -40,7 +40,7 @@ function ChartComposed(props) {
 
 
       return <text height={props.height*values.length} fontSize="10px" fill={props.fill} textAnchor={props.textAnchor} width={props.width} x={props.x} y={props.y}>
-        {values.map((val, i) => (<tspan y={props.y + 10 +i*10} x={props.x}>
+        {values.map((val, i) => (<tspan key={i} y={props.y + 10 +i*10} x={props.x}>
           {val}
         </tspan>))
 

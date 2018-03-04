@@ -26,7 +26,7 @@ if(props.payload.value.length > 10)
 {
   var values = props.payload.value.split(" ");
       return <text height={props.height} fontSize="10px" fill={props.fill} textAnchor={props.textAnchor} width={props.width} x={props.x} y={props.y}>
-        {values.map((val, i) => (<tspan y={props.y  +i*10} x={props.x}>
+        {values.map((val, i) => (<tspan key={i} y={props.y  +i*10} x={props.x}>
           {val}
         </tspan>))
 

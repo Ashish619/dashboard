@@ -213,6 +213,37 @@ const Dashboard = React.createClass({
         if (this.state.graphPeriod == 'month') {
 
 
+            Promise.all([
+                getCount(this.state.campaignID, 'visitors', this.state.graphPeriod, dateString, this.state.limit),
+                getCount(this.state.campaignID, 'popups', this.state.graphPeriod, dateString, this.state.limit),
+                getCount(this.state.campaignID, 'leads', this.state.graphPeriod, dateString, this.state.limit),
+            ]).then(values => {
+                let graphDataFormat = {
+                    "visitors": 0,
+                    "exitIntents": 0,
+                    "leadsGenerated": 0,
+                    "name": ""
+                }
+                let graphData = [];
+                for (var i = 0; i < values[0].length; i++) {
+
+                    let monthNumber = Number(values[0][i][this.state.graphPeriod]) < 9 ? Number('0' + values[0][i][this.state.graphPeriod]) : Number(values[0][i][this.state.graphPeriod]);
+
+                    graphDataFormat.visitors = Number(values[0][i]['visits']);
+                    graphDataFormat.exitIntents = Number(values[1][i]['visits']);
+                    graphDataFormat.leadsGenerated = Number(values[2][i]['visits']);
+
+                    graphDataFormat.name = moment(monthNumber, 'MM').format('MMMM');;
+                    graphData.push(Object.assign({}, graphDataFormat));
+                }
+
+                this.setState({
+                    graphData: graphData,
+                    loadingGraph: false
+                });
+            });
+
+
         }
     },
     onChange(e) {
@@ -275,7 +306,7 @@ const Dashboard = React.createClass({
                         <Card title="Analytics Report"
                             bordered={false}
                             bodyStyle={{
-                            }} className="pickerContainer">
+                            }} style={{ height: '496.5px' }} className="pickerContainer">
                             {(this.state.graphPeriod == 'day') ? <LocaleProvider locale={enUS}><DatePicker defaultValue={moment()} onChange={this.onChangeDate} format={'MM-DD-YYYY'} /></LocaleProvider> : null}
                             {(this.state.graphPeriod == 'week') ? <LocaleProvider locale={enUS}><WeekPicker onChange={this.onChangeDate} placeholder="Select week" /></LocaleProvider> : null}
                             {(this.state.graphPeriod == 'month') ? <LocaleProvider locale={enUS}><MonthPicker onChange={this.onChangeDate} placeholder="Select month" /></LocaleProvider> : null}
@@ -286,7 +317,7 @@ const Dashboard = React.createClass({
                                     borderBottomLeftRadius: 0,
                                     borderTopLeftRadius: 0,
                                     position: 'relative',
-                                    top:'-1px'
+                                    top: '-1px'
 
 
                                 }}>
@@ -300,7 +331,8 @@ const Dashboard = React.createClass({
                         <Card title="Device Report"
                             bordered={false}
                             bodyStyle={{
-                            }}>
+                            }}  style={{ height: '496.5px' }}>
+                          
                             <VerticalBarChart data={this.state.deviceData} loading={this.state.loading} />
                         </Card>
                     </Col>
@@ -308,7 +340,7 @@ const Dashboard = React.createClass({
                 <Row gutter={24}>
                     <Col lg={8} md={24}>
                         {this.state.interestActive == 'totalTimeSpent'
-                            ? <Card title="Interest Report"
+                            ? <Card style={{ height: '430px' }}  title="Interest Report"
                                 bordered={false}
                                 bodyStyle={{
                                 }}>
@@ -322,7 +354,7 @@ const Dashboard = React.createClass({
                             : <Card title="Interest Report"
                                 bordered={false}
                                 bodyStyle={{
-                                }}>
+                                }} style={{ height: '430px' }} >
                                 <div style={{ display: 'inline-block' }}>
                                     <RadioGroup onChange={this.onChangeInterest} value={this.state.interestActive}>
                                         <Radio value={'totalTimeSpent'}>Total Time Spend</Radio>
@@ -333,8 +365,8 @@ const Dashboard = React.createClass({
                         }
                     </Col>
                     <Col lg={16} md={24}>
-                        <Card title="World Report">
-                            <WorldChart worldData={this.state.worldData} loading={this.state.loading} />
+                        <Card title="World Report"  style={{ height: '430px' }}>
+                            <WorldChart worldData={this.state.worldData}  />
                         </Card>
                     </Col>
                 </Row>
