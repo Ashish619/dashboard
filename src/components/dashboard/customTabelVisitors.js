@@ -122,7 +122,7 @@ const CustomTableVisitors = React.createClass({
 
     ];
 
-    return <Col md={24}>
+    return <Col md={24} style={{padding: '0 12px'}}>
       <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
         <i className="anticon anticon-reload reloadicon" style={{cursor:'pointer'}} onClick={this.getData}></i>
         <Col xs={24} className="ant-card-head-wrapper">
