@@ -22,6 +22,7 @@ const CustomContentAnalytics = React.createClass({
 
   getData() {
     var self = this;
+    self.setState({ data: [] });
     getInfo(this.props.campaignID, 'content').then(function (response) {
       let content = response.map((val, i) => { val = { ...val, key: i }; for (var k in val) { val[k] = '' + val[k] } return val; });
       data = content;
@@ -105,12 +106,12 @@ const CustomContentAnalytics = React.createClass({
 
     return <Col md={24}>
       <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
-        <i className="anticon anticon-reload reloadicon"></i>
+        <i className="anticon anticon-reload reloadicon" style={{cursor:'pointer'}} onClick={this.getData}></i>
         <Col xs={24} className="ant-card-head-wrapper">
           <div className="ant-card-head-title">Content Analytics</div>
         </Col>
       </Row>
-      <Card style={{height:'408px'}}><Table columns={columns} dataSource={this.state.data} pagination={{
+      <Card style={{ height: '408px' }}><Table columns={columns} dataSource={this.state.data} pagination={{
         total: this.state.data.length,
         showSizeChanger: true,
         pageSize: 4,

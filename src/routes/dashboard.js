@@ -129,7 +129,14 @@ const Dashboard = React.createClass({
         });
 
     },
+    getDeviceReport() {
+        var self = this;
+        self.setState({ deviceData: [] });
+        getDeviceData(this.state.campaignID, 'asc').then(function (response) {
+            self.setState({ deviceData: response });
 
+        });
+    },
 
     onChangeInterest() {
         this.setState({ lodingPie: true });
@@ -144,6 +151,11 @@ const Dashboard = React.createClass({
         this.onChangeDate(this.state.date, this.state.dateString);
     },
 
+    updateAnalyticsGraph() {
+        let date = this.state.date;
+        let dateString = this.state.dateString;
+        this.onChangeDate(date, dateString);
+    },
     onChangeDate(date, dateString) {
 
         if (dateString == '' || dateString == null) {
@@ -151,7 +163,9 @@ const Dashboard = React.createClass({
 
         }
         this.setState({
-            loadingGraph: true
+            loadingGraph: true,
+            date: date,
+            dateString: dateString
         });
 
         if (this.state.graphPeriod == 'day') {
@@ -345,7 +359,7 @@ const Dashboard = React.createClass({
                     </Col>
                     <Col lg={12} md={24}>
                         <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
-                            <i className="anticon anticon-reload reloadicon"></i>
+                            <i className="anticon anticon-reload reloadicon" onClick={this.getDeviceReport} style={{ cursor: 'pointer' }}></i>
                             <Col xs={24} md={6} className="ant-card-head-wrapper">
                                 <div className="ant-card-head-title">Device Report</div>
                             </Col>

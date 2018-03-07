@@ -21,7 +21,9 @@ const CustomTableVisitors = React.createClass({
   },
 
   getData() {
+   
     var self = this;
+    self.setState({ data: [] });
     getInfo(this.props.campaignID, 'visitorsinfo').then(function (response) {
       let visitors = response.map((val, i) => { val = { ...val, key: i }; return val; });
       data = visitors;
@@ -114,24 +116,24 @@ const CustomTableVisitors = React.createClass({
     {
       title: 'Duration',
       dataIndex: 'dateTime',
-      key: 'dateTime'
-
+      key: 'dateTime',
+    
     }
 
     ];
 
     return <Col md={24}>
-    <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
-      <i className="anticon anticon-reload reloadicon"></i>
-      <Col xs={24} className="ant-card-head-wrapper">
-        <div className="ant-card-head-title">World Report</div>
-      </Col>
-    </Row>
+      <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
+        <i className="anticon anticon-reload reloadicon" style={{cursor:'pointer'}} onClick={this.getData}></i>
+        <Col xs={24} className="ant-card-head-wrapper">
+          <div className="ant-card-head-title">World Report</div>
+        </Col>
+      </Row>
       <Card ><Table columns={columns} dataSource={this.state.data} scroll={{ x: 1024 }} pagination={{
         total: this.state.data.length,
         showSizeChanger: true,
         pageSize: 3,
-        pageSizeOptions : ['3', '10' ,'15','20','40' ,''+this.state.data.length],
+        pageSizeOptions: ['3', '10', '15', '20', '40', '' + this.state.data.length],
         onShowSizeChange: (current, pageSize) => {
           console.log('Current: ', current, '; PageSize: ', pageSize);
         },
