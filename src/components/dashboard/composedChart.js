@@ -39,8 +39,8 @@ function ChartComposed(props) {
       }
 
 
-      return <text height={props.height*values.length} fontSize="10px" fill={props.fill} textAnchor={props.textAnchor} width={props.width} x={props.x} y={props.y}>
-        {values.map((val, i) => (<tspan key={i} y={props.y + 10 +i*10} x={props.x}>
+      return <text height={props.height * values.length} fontSize="10px" fill={props.fill} textAnchor={props.textAnchor} width={props.width} x={props.x} y={props.y}>
+        {values.map((val, i) => (<tspan key={i} y={props.y + 10 + i * 10} x={props.x}>
           {val}
         </tspan>))
 
@@ -51,7 +51,7 @@ function ChartComposed(props) {
       <div className={styles.sales}>
         <ResponsiveContainer minHeight={360}>
           <ComposedChart data={props.data}>
-            <Legend verticalAlign='top'
+            <Legend verticalAlign='bottom'
               content={props => {
 
                 const { payload } = props

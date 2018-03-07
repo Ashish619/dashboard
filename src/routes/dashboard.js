@@ -3,17 +3,20 @@ import Promise from 'promise-polyfill';
 import { connect } from 'dva'
 import {
     Row, Col, Card, Radio,
-    Input, Menu, Dropdown, Button, Icon, message
+    Input, Menu, Dropdown, Button, Icon, message, Table
 } from 'antd';
 import moment from 'moment';
 import { DatePicker } from 'antd';
 import NumberCard from '../components/dashboard/numberCard'
 import ChartComposed from '../components/dashboard/composedChart'
 import VerticalBarChart from '../components/dashboard/verticalBarChart'
+import CustomTabelVisitors from '../components/dashboard/customTabelVisitors'
+import CustomContentAnalytics from '../components/dashboard/customContentAnalytics'
+
 import InterestChart from '../components/dashboard/interestChart'
 import styles from './dashboard.less'
 import { color } from '../utils'
-import { getTotalCount, getCount, getWorldChartData, getDeviceData, getInterestData } from '../services/dashboard.js'
+import { getTotalCount, getCount, getWorldChartData, getDeviceData, getInterestData, getVisitorInfo } from '../services/dashboard.js'
 import ReactEcharts from 'echarts-for-react';
 import WorldChart from '../components/chart/g2charts/worldChart'
 import enUS from 'antd/lib/locale-provider/en_US';
@@ -29,6 +32,8 @@ const bodyStyle = {
     }
 }
 
+
+
 const Dashboard = React.createClass({
 
     getInitialState() {
@@ -39,6 +44,7 @@ const Dashboard = React.createClass({
             location.href = 'http://www.demandmatrix.com/preview/leadgain/login/#/';
 
         }
+
         return {
             loading: true,
             loadingGraph: true,
@@ -57,7 +63,10 @@ const Dashboard = React.createClass({
             interestVisitorData: [],
             interestActive: 'totalTimeSpent',
             campaignID: item,
-            limit: 7
+            limit: 7,
+            date: new Date(),
+            dateString: null,
+            visitors: []
         }
     },
 
@@ -86,8 +95,8 @@ const Dashboard = React.createClass({
             getTotalCount(this.state.campaignID, 'leads'),
             getWorldChartData(this.state.campaignID, 'asc'),
             getDeviceData(this.state.campaignID, 'asc'),
-            getInterestData(this.state.campaignID, 'asc', this.state.interest),
-            getInterestData(this.state.campaignID, 'asc', this.state.interest2)
+
+
         ]).then(values => {
             let graphDataFormat = {
                 "visitors": 0,
@@ -112,11 +121,10 @@ const Dashboard = React.createClass({
                 graphData: graphData,
                 worldData: values[6],
                 deviceData: values[7],
-                interestData: values[8],
-                interestVisitorData: values[9],
                 loadingGraph: false,
                 lodingPie: false,
-                loading: false
+                loading: false,
+                dateString: today
             });
         });
 
@@ -131,12 +139,18 @@ const Dashboard = React.createClass({
         this.setState({ lodingPie: false });
     },
 
+    onRefreshAnalytics() {
+
+        this.onChangeDate(this.state.date, this.state.dateString);
+    },
 
     onChangeDate(date, dateString) {
 
-        if (dateString == '' || dateString == null) { return; }
-        this.setState({
+        if (dateString == '' || dateString == null) {
+            return;
 
+        }
+        this.setState({
             loadingGraph: true
         });
 
@@ -204,15 +218,13 @@ const Dashboard = React.createClass({
 
                 this.setState({
                     graphData: graphData,
-                    loadingGraph: false
+                    loadingGraph: false,
+                    date: date,
+                    dateString: dateString
                 });
             });
-
-
         }
         if (this.state.graphPeriod == 'month') {
-
-
             Promise.all([
                 getCount(this.state.campaignID, 'visitors', this.state.graphPeriod, dateString, this.state.limit),
                 getCount(this.state.campaignID, 'popups', this.state.graphPeriod, dateString, this.state.limit),
@@ -236,25 +248,20 @@ const Dashboard = React.createClass({
                     graphDataFormat.name = moment(monthNumber, 'MM').format('MMMM');;
                     graphData.push(Object.assign({}, graphDataFormat));
                 }
-
                 this.setState({
                     graphData: graphData,
-                    loadingGraph: false
+                    loadingGraph: false,
+                    date: date,
+                    dateString: dateString
                 });
             });
-
-
         }
     },
     onChange(e) {
-
         this.setState({ graphPeriod: e.target.value });
-
     },
 
-
     render() {
-
         const radioStyle = {
             display: 'block',
             height: '30px',
@@ -302,74 +309,60 @@ const Dashboard = React.createClass({
             <div className="dashboard-1">
                 <Row gutter={24}>
                     {numberCards}
-                    <Col lg={16} md={24}>
-                        <Card title="Analytics Report"
-                            bordered={false}
-                            bodyStyle={{
-                            }} style={{ height: '496.5px' }} className="pickerContainer">
-                            {(this.state.graphPeriod == 'day') ? <LocaleProvider locale={enUS}><DatePicker defaultValue={moment()} onChange={this.onChangeDate} format={'MM-DD-YYYY'} /></LocaleProvider> : null}
-                            {(this.state.graphPeriod == 'week') ? <LocaleProvider locale={enUS}><WeekPicker onChange={this.onChangeDate} placeholder="Select week" /></LocaleProvider> : null}
-                            {(this.state.graphPeriod == 'month') ? <LocaleProvider locale={enUS}><MonthPicker onChange={this.onChangeDate} placeholder="Select month" /></LocaleProvider> : null}
-                            <Dropdown overlay={menu} trigger={['click']}>
-                                <a className="ant-input" href="#" style={{
-                                    display: 'inline-block',
-                                    width: 'auto',
-                                    borderBottomLeftRadius: 0,
-                                    borderTopLeftRadius: 0,
-                                    position: 'relative',
-                                    top: '-1px'
-
-
-                                }}>
-                                    <Icon type="down" />
-                                </a>
-                            </Dropdown>
+                    <Col md={24}>
+                        <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
+                            <i className="anticon anticon-reload reloadicon"></i>
+                            <Col xs={24} md={6} className="ant-card-head-wrapper">
+                                <div className="ant-card-head-title">Analytics Report</div>
+                            </Col>
+                            <Col xs={24} md={12} className="picker">
+                                {(this.state.graphPeriod == 'day') ? <LocaleProvider locale={enUS}><DatePicker defaultValue={moment()} onChange={this.onChangeDate} format={'MM-DD-YYYY'} /></LocaleProvider> : null}
+                                {(this.state.graphPeriod == 'week') ? <LocaleProvider locale={enUS}><WeekPicker onChange={this.onChangeDate} placeholder="Select week" /></LocaleProvider> : null}
+                                {(this.state.graphPeriod == 'month') ? <LocaleProvider locale={enUS}><MonthPicker onChange={this.onChangeDate} placeholder="Select month" /></LocaleProvider> : null}
+                                <Dropdown overlay={menu} trigger={['click']}>
+                                    <a className="ant-input" href="#" style={{
+                                        display: 'inline-block',
+                                        width: 'auto',
+                                        borderBottomLeftRadius: 0,
+                                        borderTopLeftRadius: 0,
+                                        position: 'relative',
+                                        top: '-1px'
+                                    }} >
+                                        <Icon type="down" />
+                                    </a>
+                                </Dropdown>
+                            </Col>
+                        </Row>
+                        <Card bordered={false}>
                             <ChartComposed data={this.state.graphData} loading={this.state.loadingGraph} />
                         </Card>
                     </Col>
-                    <Col lg={8} md={24}>
-                        <Card title="Device Report"
+
+                </Row>
+                <Row gutter={24}>
+                    <Col lg={12} md={24}>
+                        <CustomContentAnalytics campaignID={this.state.campaignID} />
+                    </Col>
+                    <Col lg={12} md={24}>
+                        <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
+                            <i className="anticon anticon-reload reloadicon"></i>
+                            <Col xs={24} md={6} className="ant-card-head-wrapper">
+                                <div className="ant-card-head-title">Device Report</div>
+                            </Col>
+                        </Row>
+                        <Card
                             bordered={false}
                             bodyStyle={{
-                            }}  style={{ height: '496.5px' }}>
-                          
+                            }} >
+
                             <VerticalBarChart data={this.state.deviceData} loading={this.state.loading} />
                         </Card>
                     </Col>
                 </Row>
                 <Row gutter={24}>
-                    <Col lg={8} md={24}>
-                        {this.state.interestActive == 'totalTimeSpent'
-                            ? <Card style={{ height: '430px' }}  title="Interest Report"
-                                bordered={false}
-                                bodyStyle={{
-                                }}>
-                                <div style={{ display: 'inline-block' }}>
-                                    <RadioGroup onChange={this.onChangeInterest} value={this.state.interestActive}>
-                                        <Radio value={'totalTimeSpent'}>Total Time Spend</Radio>
-                                        <Radio value={'visitCount'}>Visitor Count</Radio>
-                                    </RadioGroup></div>
-                                <InterestChart data={this.state.interestData} name={this.state.interestActive} loading={this.state.lodingPie} />
-                            </Card>
-                            : <Card title="Interest Report"
-                                bordered={false}
-                                bodyStyle={{
-                                }} style={{ height: '430px' }} >
-                                <div style={{ display: 'inline-block' }}>
-                                    <RadioGroup onChange={this.onChangeInterest} value={this.state.interestActive}>
-                                        <Radio value={'totalTimeSpent'}>Total Time Spend</Radio>
-                                        <Radio value={'visitCount'}>Visitor Count</Radio>
-                                    </RadioGroup></div>
-                                <InterestChart data={this.state.interestVisitorData} name={'visitCount'} loading={this.state.lodingPie} />
-                            </Card>
-                        }
-                    </Col>
-                    <Col lg={16} md={24}>
-                        <Card title="World Report"  style={{ height: '430px' }}>
-                            <WorldChart worldData={this.state.worldData}  />
-                        </Card>
-                    </Col>
+                    <CustomTabelVisitors campaignID={this.state.campaignID} />
                 </Row>
+
             </div >
         );
 

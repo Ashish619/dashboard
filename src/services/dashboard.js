@@ -52,3 +52,11 @@ export async function getInterestData (campaignId ,order,field) {
           method: 'GET',
       })
   }
+
+  export async function getInfo ( campaignId,item) {
+    const url = `${baseURL}${campaignId}/${item}?sort=asc`;
+    return request(url, {
+        method: 'GET',
+    })
+}
+ 
