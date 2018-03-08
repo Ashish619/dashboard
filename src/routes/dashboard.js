@@ -38,12 +38,12 @@ const Dashboard = React.createClass({
 
     getInitialState() {
 
-       /* var item = sessionStorage.getItem('campaignID');
+     var item = sessionStorage.getItem('campaignID');
         if (item == null || item == '') {
 
             location.href = 'http://www.demandmatrix.com/preview/leadgain/login/#/';
 
-        }*/
+        }
 
         return {
             loading: true,
@@ -62,7 +62,7 @@ const Dashboard = React.createClass({
             interestData: [],
             interestVisitorData: [],
             interestActive: 'totalTimeSpent',
-            campaignID: 9,
+            campaignID: item,
             limit: 7,
             date: new Date(),
             dateString: null,
