@@ -38,12 +38,12 @@ const Dashboard = React.createClass({
 
     getInitialState() {
 
-    var item = sessionStorage.getItem('campaignID');
+       /* var item = sessionStorage.getItem('campaignID');
         if (item == null || item == '') {
 
             location.href = 'http://www.demandmatrix.com/preview/leadgain/login/#/';
 
-        }
+        }*/
 
         return {
             loading: true,
@@ -62,7 +62,7 @@ const Dashboard = React.createClass({
             interestData: [],
             interestVisitorData: [],
             interestActive: 'totalTimeSpent',
-            campaignID: item,
+            campaignID: 9,
             limit: 7,
             date: new Date(),
             dateString: null,
@@ -152,11 +152,11 @@ const Dashboard = React.createClass({
     },
 
 
-       
- 
 
-    refreshGraph(){
-        this.setState({graphData:[]});
+
+
+    refreshGraph() {
+        this.setState({ graphData: [] });
         this.onChangeDate(this.state.date, this.state.dateString);
     },
     onChangeDate(date, dateString) {
@@ -237,7 +237,7 @@ const Dashboard = React.createClass({
                 this.setState({
                     graphData: graphData,
                     loadingGraph: false,
-                   
+
                 });
             });
         }
@@ -315,7 +315,7 @@ const Dashboard = React.createClass({
                 icon: 'line-chart',
                 color: color.red,
                 title: 'ROI Change %',
-                number: this.state.roiChange
+                number:  17000 / 200
             }
         ];
 
