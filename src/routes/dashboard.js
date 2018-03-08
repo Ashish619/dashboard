@@ -38,7 +38,7 @@ const Dashboard = React.createClass({
 
     getInitialState() {
 
-        var item = sessionStorage.getItem('campaignID');
+    var item = sessionStorage.getItem('campaignID');
         if (item == null || item == '') {
 
             location.href = 'http://www.demandmatrix.com/preview/leadgain/login/#/';
@@ -109,7 +109,7 @@ const Dashboard = React.createClass({
                 graphDataFormat.visitors = Number(values[0][i]['visits']);
                 graphDataFormat.exitIntents = Number(values[1][i]['visits']);
                 graphDataFormat.leadsGenerated = Number(values[2][i]['visits']);
-                graphDataFormat.name = moment(values[0][i][this.state.graphPeriod]).format("MMM[,] Do");
+                graphDataFormat.name = values[0][i][this.state.graphPeriod];
                 graphData.push(Object.assign({}, graphDataFormat));
             }
 
@@ -151,12 +151,16 @@ const Dashboard = React.createClass({
         this.onChangeDate(this.state.date, this.state.dateString);
     },
 
-    updateAnalyticsGraph() {
-        let date = this.state.date;
-        let dateString = this.state.dateString;
-        this.onChangeDate(date, dateString);
+
+       
+ 
+
+    refreshGraph(){
+        this.setState({graphData:[]});
+        this.onChangeDate(this.state.date, this.state.dateString);
     },
     onChangeDate(date, dateString) {
+
 
         if (dateString == '' || dateString == null) {
             return;
@@ -186,7 +190,7 @@ const Dashboard = React.createClass({
                     graphDataFormat.visitors = Number(values[0][i]['visits']);
                     graphDataFormat.exitIntents = Number(values[1][i]['visits']);
                     graphDataFormat.leadsGenerated = Number(values[2][i]['visits']);
-                    graphDataFormat.name = moment(values[0][i][this.state.graphPeriod]).format("MMM[,] Do");
+                    graphDataFormat.name = values[0][i][this.state.graphPeriod];
                     graphData.push(Object.assign({}, graphDataFormat));
                 }
 
@@ -233,8 +237,7 @@ const Dashboard = React.createClass({
                 this.setState({
                     graphData: graphData,
                     loadingGraph: false,
-                    date: date,
-                    dateString: dateString
+                   
                 });
             });
         }
@@ -325,7 +328,7 @@ const Dashboard = React.createClass({
                     {numberCards}
                     <Col md={24}>
                         <Row className="ant-card-head" style={{ marginBottom: '0px' }}>
-                            <i className="anticon anticon-reload reloadicon"></i>
+                            <i className="anticon anticon-reload reloadicon" onClick={this.refreshGraph} style={{ cursor: 'pointer' }}></i>
                             <Col xs={24} md={6} className="ant-card-head-wrapper">
                                 <div className="ant-card-head-title">Analytics Report</div>
                             </Col>

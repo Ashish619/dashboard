@@ -111,11 +111,11 @@ const CustomContentAnalytics = React.createClass({
           <div className="ant-card-head-title">Content Analytics</div>
         </Col>
       </Row>
-      <Card style={{ height: '408px' }}><Table columns={columns} dataSource={this.state.data} pagination={{
+      <Card style={{ minHeight: '408px' }}><Table columns={columns} dataSource={this.state.data} pagination={{
         total: this.state.data.length,
         showSizeChanger: true,
         pageSize: 4,
-        pageSizeOptions: ['4', '10', '15', '20', '40', '' + this.state.data.length],
+        pageSizeOptions: ['4', '10', '15', '20',  '' + this.state.data.length],
         onShowSizeChange: (current, pageSize) => {
           console.log('Current: ', current, '; PageSize: ', pageSize);
         },
